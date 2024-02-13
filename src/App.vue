@@ -1,23 +1,31 @@
-<script setup>
-window.usecsv = {
-  importerKey: 'e3033735-73be-498a-9d3c-0a8b4c070e67',
-  user: { userId: 123 },
-  metadata: { anotherId: 12345 },
-  batchSize: 1000,
-  onData: (data) => console.log({ data }),
-  onClose: () => console.log('importer is closed')
-  // ... other options
+<script>
+export default {
+  name: 'App',
+  methods: {
+    openImporter(importerKey) {
+      window.usecsv({
+        importerKey,
+        user: { userId: 123 },
+        metadata: { anotherId: 12345 },
+        batchSize: 1000,
+        onData: (data) => console.log({ data })
+      })
+    }
+  }
 }
 </script>
 
 <template>
   <h1>UseCSV example in Vue.js</h1>
-  <button id="usecsv-importer-button">Import Data</button>
+  <button class="btn" @click="openImporter('e3033735-73be-498a-9d3c-0a8b4c070e67')">
+    Import Data
+  </button>
+  <!-- required div with id="usecsv-importer-root" -->
   <div id="usecsv-importer-root"></div>
 </template>
 
 <style scoped>
-#usecsv-importer-button {
+.btn {
   width: 170px;
   height: 70px;
   color: #fff;
